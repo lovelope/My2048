@@ -125,26 +125,33 @@ function generateOneNumber() {
 }
 
 $(document).keydown(function (event) {
+    //阻止因按键上下移动产生的页面上下移动
+    //event.preventDefault();
+
     switch (event.keyCode){
         case 37: // left
+            event.preventDefault();
             if(moveLeft()){
                 setTimeout("generateOneNumber()", 210);
                 setTimeout("isgameover()", 300);
             }
             break;
         case 38: // up
+            event.preventDefault();
             if(moveUp()){
                 setTimeout("generateOneNumber()", 210);
                 setTimeout("isgameover()", 300);
             }
             break;
         case 39: // right
+            event.preventDefault();
             if(moveRight()){
                 setTimeout("generateOneNumber()", 210);
                 setTimeout("isgameover()", 300);
             }
             break;
         case 40: //down
+            event.preventDefault();
             if(moveDown()){
                 setTimeout("generateOneNumber()", 210);
                 setTimeout("isgameover()", 300);
@@ -159,6 +166,9 @@ document.addEventListener('touchstart', function (event) {
     startx = event.touches[0].pageX;
     starty = event.touches[0].pageY;
 });
+document.addEventListener('touchmove', function (event) {
+    event.preventDefault();
+})
 document.addEventListener('touchend', function (event) {
     endx = event.changedTouches[0].pageX;
     endy = event.changedTouches[0].pageY;
