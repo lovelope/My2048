@@ -12,7 +12,7 @@ function showNumberWithAnimation(i, j, randNumber) {
         height: "100px",
         top: getPosTop(i, j),
         left: getPosLeft(i, j)
-    }, 500);
+    }, 200);
 }
 
 function showMoveAnimation(fromx, fromy, tox, toy) {
