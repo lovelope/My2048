@@ -32,6 +32,7 @@ function init() {
     }
 
     updateBoardView();
+    score = 0;
 }
 
 function updateBoardView() {
@@ -87,26 +88,26 @@ $(document).keydown(function (event) {
     switch (event.keyCode){
         case 37: // left
             if(moveLeft()){
-                generateOneNumber();
-                isgameover();
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
             }
             break;
         case 38: // up
             if(moveUp()){
-                generateOneNumber();
-                isgameover();
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
             }
             break;
         case 39: // right
             if(moveRight()){
-                generateOneNumber();
-                isgameover();
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
             }
             break;
         case 40: //down
             if(moveDown()){
-                generateOneNumber();
-                isgameover();
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
             }
             break;
         default:
@@ -114,7 +115,13 @@ $(document).keydown(function (event) {
     }
 });
 function isgameover() {
-    
+    if(nospace(board) && nomove(board)){
+        gameover();
+    }
+}
+
+function gameover() {
+    alert("game over!");
 }
 function moveLeft() {
     if(!canMoveLeft(board)){
@@ -137,6 +144,9 @@ function moveLeft() {
                         //add
                         board[i][k] *= 2;
                         board[i][j] = 0;
+                        //add score
+                        score += board[i][k];
+                        updateScore(score);
                         continue;
                     }
                 }
@@ -168,6 +178,8 @@ function moveUp() {
                         //add
                         board[k][j] *= 2;
                         board[i][j] = 0;
+                        score += board[k][j];
+                        updateScore(score);
                         continue;
                     }
                 }
@@ -199,6 +211,8 @@ function moveRight() {
                         //add
                         board[i][k] *= 2;
                         board[i][j] = 0;
+                        score += board[i][k];
+                        updateScore(score);
                         continue;
                     }
                 }
@@ -230,6 +244,8 @@ function moveDown() {
                         //add
                         board[k][j] *= 2;
                         board[i][j] = 0;
+                        score += board[k][j];
+                        updateScore(score);
                         continue;
                     }
                 }
