@@ -5,6 +5,11 @@ var board = new Array();
 var score = 0;
 var hasConflicted = new Array();
 
+var startx = 0,
+    starty = 0,
+    endx = 0,
+    endy = 0;
+
 $(document).ready(function () {
     prepareForMobile();
     newgame();
@@ -149,6 +154,44 @@ $(document).keydown(function (event) {
             break;
     }
 });
+
+document.addEventListener('touchstart', function (event) {
+    startx = event.touches[0].pageX;
+    starty = event.touches[0].pageY;
+});
+document.addEventListener('touchend', function (event) {
+    endx = event.changedTouches[0].pageX;
+    endy = event.changedTouches[0].pageY;
+
+    var deltax = endx - startx,
+        deltay = endy - starty;
+    if(Math.abs(deltax) >= Math.abs(deltay)){ // x
+        if(deltax > 0){ // move right
+            if(moveRight()){
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
+            }
+        }else{ // move left
+            if(moveLeft()){
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
+            }
+        }
+    }else{ // y
+        if(deltay > 0){ // move down
+            if(moveDown()){
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
+            }
+        }else{ // move up
+            if(moveUp()){
+                setTimeout("generateOneNumber()", 210);
+                setTimeout("isgameover()", 300);
+            }
+        }
+    }
+});
+
 function isgameover() {
     if(nospace(board) && nomove(board)){
         gameover();
